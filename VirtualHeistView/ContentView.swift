@@ -12,7 +12,7 @@ struct ContentView: View {
         NavigationView {
             ZStack {
                 
-             bg
+             background
                 
                 VStack {
                     
@@ -97,7 +97,7 @@ struct ContentView: View {
     
     
     
-    var bg: some View {
+    var background: some View {
         Image("bg1")
             .resizable()
             .ignoresSafeArea()
