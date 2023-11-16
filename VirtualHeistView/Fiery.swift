@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct Fiery: View {
+    @State var userCorrect = false
+    @State var secUserChoice: SecChoiceCases?
+    @State var usersChoice: ChoiceCases?
     @State var choice: [String] = ["Laser Blazer 9000", "Fly Guys 25's", "Dark Doagans Invisibility potion"]
+    mutating func changeChoice(newSetOfChoices: [String]) {
+        self = Fiery(choice: newSetOfChoices)
+    }
+    
     var body: some View {
+        
+        
         ZStack{
             
             background
@@ -19,10 +28,18 @@ struct Fiery: View {
                 header
                 
                 ScrollingView
+                    .padding(3)
                 
             }
         }
     }
+    
+    enum SecChoiceCases: CaseIterable {
+        case left
+        case right
+        case straight
+    }
+    
     
     
     
@@ -42,48 +59,149 @@ struct Fiery: View {
     
     var ScrollingView: some View {
         return ScrollView {
-            Introduction()
-                .foregroundColor(Color("red1"))
-                .font(.title)
-            HStack{
-                VStack(alignment: .leading) {
-                    ForEach(choice, id: \.self) { tool in
-                        Text("They could choose \(tool)\n")
+            ZStack {
+                RoundedRectangle(cornerRadius: 12).fill(Color("fiery")).opacity(0.8)
+                VStack {
+                    Introduction()
+                        .foregroundColor(Color("red1"))
+                        .font(.title)
+                    HStack{
+                        VStack(alignment: .leading) {
+                            ForEach(choice, id: \.self) { tool in
+                                Text("They could choose \(tool)\n")
+                            }
+                            .foregroundColor(Color("red1"))
+                            .font(.title)
+                        }
+                        Spacer()
+                        
                     }
-                    .foregroundColor(Color("red1"))
-                    .font(.title)
-                }
-                Spacer()
-                
+                    
+                  buttons
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(choiceResults)
+                                .font(.title)
+                                .foregroundColor(Color("red1"))
+                                
+                            
+                            if userCorrect == true {
+                                buttons
+                            }
+                        }
+                        Spacer()
+                    }
+                    
+                    
+                }.padding()
             }
-            
-            
-            
-            
-            HStack(spacing: 20) {
-                Button(action: {
-                    
-                }, label: {
-                    Text("Option 1")
-                })
-                Button(action: {
-                    
-                }, label: {
-                    Text("Option 1")
-                })
-                Button(action: {
-                    
-                }, label: {
-                    Text("Option 1")
-                })
-            }
-            
-            
         }
-        .padding()
-        .background(Color("fiery").opacity(0.8)).cornerRadius(12)
+        
     }
     
+    var buttons: some View {
+        return HStack(spacing: 20) {
+            Button(action: {
+                usersChoice = .blaster
+            }, label: {
+                Text("Blaster")
+            })
+            .background(Color("red1")).cornerRadius(12)
+            
+            
+            Button(action: {
+                usersChoice = .boots
+            }, label: {
+                Text("Boots")
+            })
+            .background(Color("red1")).cornerRadius(12)
+
+            
+            Button(action: {
+                usersChoice = .potion
+                
+            }, label: {
+                Text("Potion")
+            })
+            .background(Color("red1")).cornerRadius(12)
+
+        }
+        .font(.title)
+            .buttonStyle(BorderedButtonStyle())
+
+            .foregroundColor(Color("fiery"))
+    }
+    
+    
+    
+    
+    var secSetButtons: some View {
+        return HStack(spacing: 20) {
+            Button(action: {
+                secUserChoice = .left
+            }, label: {
+                Text("Left")
+            })
+            .background(Color("red1")).cornerRadius(12)
+            
+            
+            Button(action: {
+                secUserChoice = .straight
+            }, label: {
+                Text("Straight")
+            })
+            .background(Color("red1")).cornerRadius(12)
+
+            
+            Button(action: {
+                secUserChoice = .right
+                
+            }, label: {
+                Text("Right")
+            })
+            .background(Color("red1")).cornerRadius(12)
+
+        }
+        .font(.title)
+            .buttonStyle(BorderedButtonStyle())
+
+            .foregroundColor(Color("fiery"))    }
+    
+    
+    var choiceResults:  String {
+        if let usersChoice = usersChoice {
+            switch usersChoice {
+            case .boots:
+               userCorrect = true
+                return "They used the boots and got away! \n" + survive(alive: true)
+            case .blaster:
+                return "Can't shoot through dragon skin! \n" + survive(alive: false)
+            case .potion:
+                return "The dragon just burned the whole room! \n" + survive(alive: false)
+            
+            }
+            
+        } else {
+            return ""
+        }
+    }
+    var secChoiceResults: String {
+        if let secUserChoice = secUserChoice {
+            switch secUserChoice {
+            case .left:
+               
+                return "All they had to do was move a little further down the path and they found the exit.As soon as they got out, they all said screw this game hoped of for the day. END OF CHAPTER" +  survive(alive: true)
+              
+            case .right:
+                return survive(alive: false)
+            case .straight:
+                return survive(alive: false)
+            }
+        } else {
+            return ""
+        }
+    }
     
     var header: some View {
         VStack {
