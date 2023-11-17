@@ -18,7 +18,7 @@
 		62297F322B02ADCF005A47D2 /* Investigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62297F312B02ADCF005A47D2 /* Investigation.swift */; };
 		62297F342B02AE73005A47D2 /* Lumina.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62297F332B02AE73005A47D2 /* Lumina.swift */; };
 		62297F362B02AE91005A47D2 /* Legends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62297F352B02AE91005A47D2 /* Legends.swift */; };
-		62297F392B02AEB3005A47D2 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62297F382B02AEB3005A47D2 /* Collection.swift */; };
+		622C5C072B07F2B4002F8693 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622C5C062B07F2B4002F8693 /* Collection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +54,7 @@
 		62297F312B02ADCF005A47D2 /* Investigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Investigation.swift; sourceTree = "<group>"; };
 		62297F332B02AE73005A47D2 /* Lumina.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lumina.swift; sourceTree = "<group>"; };
 		62297F352B02AE91005A47D2 /* Legends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Legends.swift; sourceTree = "<group>"; };
-		62297F382B02AEB3005A47D2 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		622C5C062B07F2B4002F8693 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,9 +107,9 @@
 			children = (
 				62297F042B02A4D8005A47D2 /* VirtualHeistViewApp.swift */,
 				62297F062B02A4D8005A47D2 /* ContentView.swift */,
-				62297F382B02AEB3005A47D2 /* Collection.swift */,
 				62297F2F2B02ABB2005A47D2 /* Fiery.swift */,
 				62297F332B02AE73005A47D2 /* Lumina.swift */,
+				622C5C062B07F2B4002F8693 /* Collection.swift */,
 				62297F312B02ADCF005A47D2 /* Investigation.swift */,
 				62297F352B02AE91005A47D2 /* Legends.swift */,
 				62297F082B02A4D9005A47D2 /* Assets.xcassets */,
@@ -279,7 +279,7 @@
 				62297F322B02ADCF005A47D2 /* Investigation.swift in Sources */,
 				62297F342B02AE73005A47D2 /* Lumina.swift in Sources */,
 				62297F362B02AE91005A47D2 /* Legends.swift in Sources */,
-				62297F392B02AEB3005A47D2 /* Collection.swift in Sources */,
+				622C5C072B07F2B4002F8693 /* Collection.swift in Sources */,
 				62297F052B02A4D8005A47D2 /* VirtualHeistViewApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
