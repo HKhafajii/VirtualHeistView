@@ -183,7 +183,7 @@ struct Fiery: View {
     
     
     var choiceResults:  String {
-        var secChall = Chall2(chall2Lines: ["went to the", "They finally escaped"], problem: "They ran into a cave that's so dark they lost eachother")
+        let secChall = Chall2(chall2Lines: ["went to the", "They finally escaped"], problem: "They ran into a cave that's so dark they lost eachother")
         if let usersChoice = usersChoice {
             switch usersChoice {
             case .boots:
@@ -356,7 +356,7 @@ In this sudden event they were presented with 3 choices.
     
 func chall2() {
         storyInfo.userAnswer = false
-    var secChall = Chall2(chall2Lines: ["went to the", "They finally escaped"], problem: "They ran into a cave that's so dark they lost eachother")
+    let secChall = Chall2(chall2Lines: ["went to the", "They finally escaped"], problem: "They ran into a cave that's so dark they lost eachother")
         info.changeChoice(setOfChoices: ["left path", "right path", "straight path"])
         
         enum pathchoice{
