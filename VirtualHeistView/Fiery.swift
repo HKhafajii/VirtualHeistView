@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Fiery: View {
+    @State var names = ["Tavon", "Hassan", "Ayme", "Tre", "Dante"]
     @State var userCorrect = false
     @State var secUserChoice: SecChoiceCases?
     @State var usersChoice: ChoiceCases?
@@ -58,9 +59,10 @@ struct Fiery: View {
     }
     
     var ScrollingView: some View {
+        
         return ScrollView {
             ZStack {
-                RoundedRectangle(cornerRadius: 12).fill(Color("fiery")).opacity(0.8)
+                RoundedRectangle(cornerRadius: 12).fill(Color("fiery")).opacity(0.9)
                 VStack {
                     Introduction()
                         .foregroundColor(Color("red1"))
@@ -86,9 +88,17 @@ struct Fiery: View {
                                 .foregroundColor(Color("red1"))
                                 
                             
+                            
+                            
                             if userCorrect == true {
-                                buttons
+                                nextChall()
+                                
+                                secSetButtons
+                                    
                             }
+                            Text(secChoiceResults)
+                                .font(.title)
+                                .foregroundColor(Color("red1"))
                         }
                         Spacer()
                     }
@@ -104,6 +114,7 @@ struct Fiery: View {
         return HStack(spacing: 20) {
             Button(action: {
                 usersChoice = .blaster
+                userCorrect = false
             }, label: {
                 Text("Blaster")
             })
@@ -112,6 +123,7 @@ struct Fiery: View {
             
             Button(action: {
                 usersChoice = .boots
+                userCorrect = true
             }, label: {
                 Text("Boots")
             })
@@ -119,6 +131,7 @@ struct Fiery: View {
 
             
             Button(action: {
+                userCorrect = false
                 usersChoice = .potion
                 
             }, label: {
@@ -170,15 +183,16 @@ struct Fiery: View {
     
     
     var choiceResults:  String {
+        var secChall = Chall2(chall2Lines: ["went to the", "They finally escaped"], problem: "They ran into a cave that's so dark they lost eachother")
         if let usersChoice = usersChoice {
             switch usersChoice {
             case .boots:
-               userCorrect = true
-                return "They used the boots and got away! \n" + survive(alive: true)
+              
+                return "They used the boots and got away. \n\n" + survive(alive: true) + "\n\nAs they tried to escape, \(secChall.problem). \n\nBeing split apart, Hassan is brought to make a choice.\n"
             case .blaster:
-                return "Can't shoot through dragon skin! \n" + survive(alive: false)
+                return "Can't shoot through dragon skin. \n\n" + survive(alive: false)
             case .potion:
-                return "The dragon just burned the whole room! \n" + survive(alive: false)
+                return "The dragon just burned the whole room. \n\n" + survive(alive: false)
             
             }
             
@@ -187,16 +201,18 @@ struct Fiery: View {
         }
     }
     var secChoiceResults: String {
+       
         if let secUserChoice = secUserChoice {
             switch secUserChoice {
             case .left:
                
-                return "All they had to do was move a little further down the path and they found the exit.As soon as they got out, they all said screw this game hoped of for the day. END OF CHAPTER" +  survive(alive: true)
+                return "You chose the \(nextChall.chall2.choice[0]) And you chose right! \n\n\(nextChall.chall2.names[1]) ran accross the path and ran into the rest of the team, everyone was just so happy to see him. \n\nAs soon as they saw eachother, they took off their headsets and called it a day."
               
             case .right:
-                return survive(alive: false)
+                
+                return "You chose the \(nextChall.chall2.choice[1]). \n\nSadly, down this path \(nextChall.chall2.names[1]) ran into a giant bear guarding her cubs. \n\n\(nextChall.chall2.names[1]) really sat and thought about it for a while, damn, he should've been married by now."
             case .straight:
-                return survive(alive: false)
+                return "You chose the \(nextChall.chall2.choice[2]). \n\nSadly, down this path \(nextChall.chall2.names[1]) ran striaght into a giant hole that had him falling for 2 hours. \n\n\(nextChall.chall2.names[1]) contemplated about life for a while and thought, wow, he should've got married."
             }
         } else {
             return ""
@@ -216,6 +232,19 @@ struct Fiery: View {
     }
 }
 
+struct nextChall: View {
+    static var chall2 = Fiery(choice: ["left path", "right path", "straight path"])
+    var body: some View {
+        ForEach(nextChall.chall2.choice, id: \.self) { tool in
+            Text("\(nextChall.chall2.names[1]) could choose the \(tool)\n")
+        }
+        .font(.title)
+        .foregroundColor(Color("red1"))
+        
+    }
+   
+    
+}
 //
 //  Chapter1.swift
 //  CLIStoryTemplate
@@ -327,7 +356,7 @@ In this sudden event they were presented with 3 choices.
     
 func chall2() {
         storyInfo.userAnswer = false
-        let secChall = Chall2(chall2Lines: ["went to the", "They finally escaped"], problem: "They ran into a cave that's so dark they lost eachother")
+    var secChall = Chall2(chall2Lines: ["went to the", "They finally escaped"], problem: "They ran into a cave that's so dark they lost eachother")
         info.changeChoice(setOfChoices: ["left path", "right path", "straight path"])
         
         enum pathchoice{
@@ -349,8 +378,7 @@ func chall2() {
                     storyInfo.dead = false
                     print(
                         """
-                        You chose the \(info.choice[0])
-                        And you chose right! \(info.names[1]) ran accross the path and ran into the rest of the team, everyone was just so happy to see \(info.names[1]).
+                        .
                         """
                     )
                 case 2:
